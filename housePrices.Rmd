@@ -1,0 +1,17 @@
+---
+title: "House Prices: Advanced regression techniques"
+output: html_notebook
+---
+The aim of this notebook is to predict sales prices and practice feature engineering, RFs and gradient boosting. There are three files given, that include - train.csv, test.csv, and sample_submission.csv. The sample_submission.csv is a bechmark submission from a linear regression on year and month of sale, lot of square footage, and number of bedrooms.
+
+```{r}
+library(readr)
+train <- read_csv("~/R/housePrices/data/train.csv")
+test <- read_csv("~/R/housePrices/data/test.csv")
+sample_submission <- read_csv("~/R/housePrices/data/sample_submission.csv")
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).

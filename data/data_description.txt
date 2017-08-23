@@ -1,327 +1,524 @@
+MSSubClass: Identifies the type of dwelling involved in the sale.	
 
+        20	1-STORY 1946 & NEWER ALL STYLES
+        30	1-STORY 1945 & OLDER
+        40	1-STORY W/FINISHED ATTIC ALL AGES
+        45	1-1/2 STORY - UNFINISHED ALL AGES
+        50	1-1/2 STORY FINISHED ALL AGES
+        60	2-STORY 1946 & NEWER
+        70	2-STORY 1945 & OLDER
+        75	2-1/2 STORY ALL AGES
+        80	SPLIT OR MULTI-LEVEL
+        85	SPLIT FOYER
+        90	DUPLEX - ALL STYLES AND AGES
+       120	1-STORY PUD (Planned Unit Development) - 1946 & NEWER
+       150	1-1/2 STORY PUD - ALL AGES
+       160	2-STORY PUD - 1946 & NEWER
+       180	PUD - MULTILEVEL - INCL SPLIT LEV/FOYER
+       190	2 FAMILY CONVERSION - ALL STYLES AND AGES
 
+MSZoning: Identifies the general zoning classification of the sale.
+		
+       A	Agriculture
+       C	Commercial
+       FV	Floating Village Residential
+       I	Industrial
+       RH	Residential High Density
+       RL	Residential Low Density
+       RP	Residential Low Density Park 
+       RM	Residential Medium Density
+	
+LotFrontage: Linear feet of street connected to property
 
-<!DOCTYPE html>
+LotArea: Lot size in square feet
 
-<!--[if lt IE 7 ]><html class="ie ie6 lte7 lte8 lte9"><![endif]-->
-<!--[if IE 7 ]><html class="ie ie7 lte7 lte8 lte9"><![endif]-->
-<!--[if IE 8 ]><html class="ie ie8 lte8 lte9"><![endif]-->
-<!--[if IE 9 ]><html class="ie ie9 lte9"><![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--><html ><!--<![endif]-->
+Street: Type of road access to property
 
-<head>
-    <link href='//fonts.googleapis.com/css?family=Merriweather:400,700|Open+Sans:300,400italic,700italic,400,700' rel='stylesheet' type='text/css'> 
+       Grvl	Gravel	
+       Pave	Paved
+       	
+Alley: Type of alley access to property
 
-    
-    <link rel="stylesheet" href="/content/v/1fb55cec3f8f/shared/css/font-awesome.min.css">
+       Grvl	Gravel
+       Pave	Paved
+       NA 	No alley access
+		
+LotShape: General shape of property
 
-    
+       Reg	Regular	
+       IR1	Slightly irregular
+       IR2	Moderately Irregular
+       IR3	Irregular
+       
+LandContour: Flatness of the property
 
-    <title>Login | Kaggle</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="robots" content="index, follow" />
-    <link href="/content/v/d420a040e581/kaggle/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+       Lvl	Near Flat/Level	
+       Bnk	Banked - Quick and significant rise from street grade to building
+       HLS	Hillside - Significant slope from side to side
+       Low	Depression
+		
+Utilities: Type of utilities available
+		
+       AllPub	All public Utilities (E,G,W,& S)	
+       NoSewr	Electricity, Gas, and Water (Septic Tank)
+       NoSeWa	Electricity and Gas Only
+       ELO	Electricity only	
+	
+LotConfig: Lot configuration
 
+       Inside	Inside lot
+       Corner	Corner lot
+       CulDSac	Cul-de-sac
+       FR2	Frontage on 2 sides of property
+       FR3	Frontage on 3 sides of property
+	
+LandSlope: Slope of property
+		
+       Gtl	Gentle slope
+       Mod	Moderate Slope	
+       Sev	Severe Slope
+	
+Neighborhood: Physical locations within Ames city limits
 
-        <meta name="keywords" content="Kaggle, data science, datasets, public data, crowdsourced analytics, competitions, tutorials, scripts, Python, R, InClass, jobs board" />
-            <meta name="description" content="Kaggle is your home for data science. Learn new skills, build your career, collaborate with other data scientists, and compete in world-class machine learning challenges." />
+       Blmngtn	Bloomington Heights
+       Blueste	Bluestem
+       BrDale	Briardale
+       BrkSide	Brookside
+       ClearCr	Clear Creek
+       CollgCr	College Creek
+       Crawfor	Crawford
+       Edwards	Edwards
+       Gilbert	Gilbert
+       IDOTRR	Iowa DOT and Rail Road
+       MeadowV	Meadow Village
+       Mitchel	Mitchell
+       Names	North Ames
+       NoRidge	Northridge
+       NPkVill	Northpark Villa
+       NridgHt	Northridge Heights
+       NWAmes	Northwest Ames
+       OldTown	Old Town
+       SWISU	South & West of Iowa State University
+       Sawyer	Sawyer
+       SawyerW	Sawyer West
+       Somerst	Somerset
+       StoneBr	Stone Brook
+       Timber	Timberland
+       Veenker	Veenker
+			
+Condition1: Proximity to various conditions
+	
+       Artery	Adjacent to arterial street
+       Feedr	Adjacent to feeder street	
+       Norm	Normal	
+       RRNn	Within 200' of North-South Railroad
+       RRAn	Adjacent to North-South Railroad
+       PosN	Near positive off-site feature--park, greenbelt, etc.
+       PosA	Adjacent to postive off-site feature
+       RRNe	Within 200' of East-West Railroad
+       RRAe	Adjacent to East-West Railroad
+	
+Condition2: Proximity to various conditions (if more than one is present)
+		
+       Artery	Adjacent to arterial street
+       Feedr	Adjacent to feeder street	
+       Norm	Normal	
+       RRNn	Within 200' of North-South Railroad
+       RRAn	Adjacent to North-South Railroad
+       PosN	Near positive off-site feature--park, greenbelt, etc.
+       PosA	Adjacent to postive off-site feature
+       RRNe	Within 200' of East-West Railroad
+       RRAe	Adjacent to East-West Railroad
+	
+BldgType: Type of dwelling
+		
+       1Fam	Single-family Detached	
+       2FmCon	Two-family Conversion; originally built as one-family dwelling
+       Duplx	Duplex
+       TwnhsE	Townhouse End Unit
+       TwnhsI	Townhouse Inside Unit
+	
+HouseStyle: Style of dwelling
+	
+       1Story	One story
+       1.5Fin	One and one-half story: 2nd level finished
+       1.5Unf	One and one-half story: 2nd level unfinished
+       2Story	Two story
+       2.5Fin	Two and one-half story: 2nd level finished
+       2.5Unf	Two and one-half story: 2nd level unfinished
+       SFoyer	Split Foyer
+       SLvl	Split Level
+	
+OverallQual: Rates the overall material and finish of the house
 
-            <link rel="stylesheet" href="/content/v/0efc36570eef/shared/css/base.less" type="text/css" />
-        <link rel="stylesheet" href="/content/v/e1cd6968c0d2/kaggle/css/kaggle-site.less" type="text/css" />
+       10	Very Excellent
+       9	Excellent
+       8	Very Good
+       7	Good
+       6	Above Average
+       5	Average
+       4	Below Average
+       3	Fair
+       2	Poor
+       1	Very Poor
+	
+OverallCond: Rates the overall condition of the house
 
-        <script type="text/javascript" src="/content/v/4e8d906fe022/shared/js/jquery-1.7.2.min.js"></script>
-            <script type="text/javascript" src="/content/v/7846b5904b60/shared/js/jquery-ui-1.9.2.min.js"></script>
+       10	Very Excellent
+       9	Excellent
+       8	Very Good
+       7	Good
+       6	Above Average	
+       5	Average
+       4	Below Average	
+       3	Fair
+       2	Poor
+       1	Very Poor
+		
+YearBuilt: Original construction date
 
-    
-        <script type="text/javascript" src="/content/v/a60ecf3c5c7d/shared/js/kaggle.min.js"></script>
-        <script type="text/javascript">
-            
-            Kaggle.Current.siteId = 1;
-                    </script>
+YearRemodAdd: Remodel date (same as construction date if no remodeling or additions)
 
-    
-    <!--[if (gte IE 6)&(lte IE 8)]>
-        <script type="text/javascript" src="/content/v/f1f17fea7cee/shared/js/ie/selectivizr.min.js"></script>
-    <![endif]-->
+RoofStyle: Type of roof
 
-    
-                                    
-                                                                
-                    <link rel="apple-touch-icon" href="/content/v/1e4cdaa83f46/kaggle/img/apple-touch-icon.png" />
+       Flat	Flat
+       Gable	Gable
+       Gambrel	Gabrel (Barn)
+       Hip	Hip
+       Mansard	Mansard
+       Shed	Shed
+		
+RoofMatl: Roof material
 
+       ClyTile	Clay or Tile
+       CompShg	Standard (Composite) Shingle
+       Membran	Membrane
+       Metal	Metal
+       Roll	Roll
+       Tar&Grv	Gravel & Tar
+       WdShake	Wood Shakes
+       WdShngl	Wood Shingles
+		
+Exterior1st: Exterior covering on house
 
-    
-    <!--[if lt IE 9]>
-        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+       AsbShng	Asbestos Shingles
+       AsphShn	Asphalt Shingles
+       BrkComm	Brick Common
+       BrkFace	Brick Face
+       CBlock	Cinder Block
+       CemntBd	Cement Board
+       HdBoard	Hard Board
+       ImStucc	Imitation Stucco
+       MetalSd	Metal Siding
+       Other	Other
+       Plywood	Plywood
+       PreCast	PreCast	
+       Stone	Stone
+       Stucco	Stucco
+       VinylSd	Vinyl Siding
+       Wd Sdng	Wood Siding
+       WdShing	Wood Shingles
+	
+Exterior2nd: Exterior covering on house (if more than one material)
 
-    
+       AsbShng	Asbestos Shingles
+       AsphShn	Asphalt Shingles
+       BrkComm	Brick Common
+       BrkFace	Brick Face
+       CBlock	Cinder Block
+       CemntBd	Cement Board
+       HdBoard	Hard Board
+       ImStucc	Imitation Stucco
+       MetalSd	Metal Siding
+       Other	Other
+       Plywood	Plywood
+       PreCast	PreCast
+       Stone	Stone
+       Stucco	Stucco
+       VinylSd	Vinyl Siding
+       Wd Sdng	Wood Siding
+       WdShing	Wood Shingles
+	
+MasVnrType: Masonry veneer type
 
+       BrkCmn	Brick Common
+       BrkFace	Brick Face
+       CBlock	Cinder Block
+       None	None
+       Stone	Stone
+	
+MasVnrArea: Masonry veneer area in square feet
 
+ExterQual: Evaluates the quality of the material on the exterior 
+		
+       Ex	Excellent
+       Gd	Good
+       TA	Average/Typical
+       Fa	Fair
+       Po	Poor
+		
+ExterCond: Evaluates the present condition of the material on the exterior
+		
+       Ex	Excellent
+       Gd	Good
+       TA	Average/Typical
+       Fa	Fair
+       Po	Poor
+		
+Foundation: Type of foundation
+		
+       BrkTil	Brick & Tile
+       CBlock	Cinder Block
+       PConc	Poured Contrete	
+       Slab	Slab
+       Stone	Stone
+       Wood	Wood
+		
+BsmtQual: Evaluates the height of the basement
 
-    <script>
-          window.intercomSettings = {
-            app_id: "koj6gxx6"
-          };
-    </script>
-<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/koj6gxx6';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
-</head>
-<body class="logged-out    kaggle">
-    <div id="watermark1" class=""></div>
-    <div id="watermark2" class=""></div>
+       Ex	Excellent (100+ inches)	
+       Gd	Good (90-99 inches)
+       TA	Typical (80-89 inches)
+       Fa	Fair (70-79 inches)
+       Po	Poor (<70 inches
+       NA	No Basement
+		
+BsmtCond: Evaluates the general condition of the basement
 
-    <div id="wrap"><!-- needed for sticky footer -->
+       Ex	Excellent
+       Gd	Good
+       TA	Typical - slight dampness allowed
+       Fa	Fair - dampness or some cracking or settling
+       Po	Poor - Severe cracking, settling, or wetness
+       NA	No Basement
+	
+BsmtExposure: Refers to walkout or garden level walls
 
+       Gd	Good Exposure
+       Av	Average Exposure (split levels or foyers typically score average or above)	
+       Mn	Mimimum Exposure
+       No	No Exposure
+       NA	No Basement
+	
+BsmtFinType1: Rating of basement finished area
 
-<div id="menu-open-overlay"></div>
+       GLQ	Good Living Quarters
+       ALQ	Average Living Quarters
+       BLQ	Below Average Living Quarters	
+       Rec	Average Rec Room
+       LwQ	Low Quality
+       Unf	Unfinshed
+       NA	No Basement
+		
+BsmtFinSF1: Type 1 finished square feet
 
-<div id="header2" class="">
-    <div id="header2-inside" class=>
-        <a id="logo" href="/"><img alt="Kaggle" height="86" src="/content/v/9da25a3f126b/kaggle/img/site-logo.png" width="240" /></a>
+BsmtFinType2: Rating of basement finished area (if multiple types)
 
-            <ul id="header-ul">
-                <li>
-  <a href="/solutions/competitions">Host</a>
-</li>
-<li>
-  <a href="/competitions">Competitions</a>
-</li>
-<li>
-  <a href="/datasets">Datasets</a>
-</li>
-<li>
-  <a href="/kernels">Kernels</a>
-</li>
-<li>
-  <a href="/jobs">Jobs</a>
-</li>
-<li>
-<a href="">Community &#9662;</a>
-<ul>
-  <li><a href='/users'>User Rankings</a></li>
-  <li><a href='/forums'>Forum</a></li>
-  <li><a href="http://blog.kaggle.com" target="_blank">Blog</a></li>
-  <li><a href='/Wiki'>Wiki</a></li>
-</ul>
-</li><!-- <script>
-  $(function(){
-    if (!$('body.logged-in').length) {
-      $('a.logged-in-only').hide().parent().next().find('a').css('padding-top','10px');
-    }
-  });
-</script> -->
-            </ul>
+       GLQ	Good Living Quarters
+       ALQ	Average Living Quarters
+       BLQ	Below Average Living Quarters	
+       Rec	Average Rec Room
+       LwQ	Low Quality
+       Unf	Unfinshed
+       NA	No Basement
 
-        <script>
-            jQuery(function () {
-                jQuery('#header-ul li:has(ul) > a').click(function (e) {
-                    e.preventDefault();
+BsmtFinSF2: Type 2 finished square feet
 
-                    jQuery('#header-ul li').not(jQuery(this).parent()).find('ul').removeClass('open');
-                    jQuery(this).parent().find('ul').toggleClass('open');
-                    jQuery('#menu-open-overlay').show();
-                });
+BsmtUnfSF: Unfinished square feet of basement area
 
-                jQuery('#menu-open-overlay').click(function () {
-                    jQuery('#header-ul ul').removeClass('open');
-                    jQuery('#top-bar-signin').hide();
-                    jQuery(this).hide();
-                });
+TotalBsmtSF: Total square feet of basement area
 
-            });
-        </script>
+Heating: Type of heating
+		
+       Floor	Floor Furnace
+       GasA	Gas forced warm air furnace
+       GasW	Gas hot water or steam heat
+       Grav	Gravity furnace	
+       OthW	Hot water or steam heat other than gas
+       Wall	Wall furnace
+		
+HeatingQC: Heating quality and condition
 
-        <ul id="header-control">
-                <li id="header-signup"><a href="/account/register"><strong><text>Sign up</text></strong></a></li>
-                <li id="header-login">
-                    <a href="/account/login?returnUrl=%2Faccount%2Flogin%3FReturnUrl%3D%252fc%252fhouse-prices-advanced-regression-techniques%252fdownload%252fdata_description.txt" class="login-link">Login</a>
-                </li>
-        </ul>
-            <div id="top-bar-signin">
-                <div id="social-authentication-top">
-    <div id="social-authentication-top-head">
-        Log in<br/>
-        with &mdash;
-    </div>
-    <div id="social-authentication-top-buttons">
-        <a href="/account/authenticate/facebook" class="socialSignIn facebook" title="Log in with Facebook"><img src="/content/v/368347303d78/shared/img/auth-facebook.png" width="36" height="36" alt="Sign up with Facebook" title="Sign up with Facebook" /></a>
-        <a href="/account/authenticate/google" class="socialSignIn google" title="Log in with Google"><img src="/content/v/ace060e512d3/shared/img/auth-google.png" width="36" height="36" alt="Sign up with Google" title="Sign up with Google" /></a>
-        <a href="/account/authenticate/yahoo" class="socialSignIn yahoo" title="Log in with Yahoo"><img src="/content/v/2ff11e08ba40/shared/img/auth-yahoo.png" width="36" height="36" alt="Sign up with Yahoo" title="Sign up with Yahoo" /></a>
-    </div>
-    
-    <script type="text/javascript">
-        var socialSignInLinks = $('a.socialSignIn');
-        socialSignInLinks.attr("href", function(i,v){
-            return v + '?js=1';
-        });
-        socialSignInLinks.click(function(){
-            _gaq.push(['_trackEvent', 'action', 'login', 'top-bar']);
-            return true;
-        });
-    </script>
-</div>
-    
+       Ex	Excellent
+       Gd	Good
+       TA	Average/Typical
+       Fa	Fair
+       Po	Poor
+		
+CentralAir: Central air conditioning
 
-<form action="/account/login" id="signin" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="https://www.kaggle.com/account/login?ReturnUrl=%2fc%2fhouse-prices-advanced-regression-techniques%2fdownload%2fdata_description.txt" /><input data-val="true" data-val-length="The field User name must be a string with a minimum length of 2 and a maximum length of 255." data-val-length-max="255" data-val-length-min="2" data-val-required="The User name field is required." id="UserName" name="UserName" placeholder="Email / username" type="text" value="" /><span class="field-validation-valid" data-valmsg-for="UserName" data-valmsg-replace="true"></span><input data-val="true" data-val-length="The field Password must be a string with a minimum length of 1 and a maximum length of 255." data-val-length-max="255" data-val-length-min="1" data-val-required="The Password field is required." id="Password" name="Password" placeholder="Password" type="password" /><span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>    <div id="remember-me">
-        <input data-val="true" data-val-required="The Remember me? field is required." id="RememberMe" name="RememberMe" type="checkbox" value="true" /><input name="RememberMe" type="hidden" value="false" />            
-        <label for="RememberMe">Remember me?</label>
-    </div>   
-    <input type="submit" value="Login" />
-<input name="__RequestVerificationToken" type="hidden" value="jjWbU5GZTJfGo5q6TRJbE-X2Iu_1OTuGOs40wEoycHW_8gzCHGplA4ZQ3TqGI8SXWfkwFoFpLH38KRwuUq44S1iQdxk1" />    <input id="signinjs" type="hidden" name="JavaScriptEnabled" value="false" />    
-</form>
-<script type="text/javascript">
-    $('#signinjs').attr('value', 'true');
-    $('#signin').submit(function () { _gaq.push(['_trackEvent', 'action', 'login', 'top-bar']); });
-</script>
+       N	No
+       Y	Yes
+		
+Electrical: Electrical system
 
-<div id="forgot-links">        
-    Forgot your <a href="/forgot/username">Username</a> 
-    / 
-    <a href="/forgot/password">Password</a>?
-</div>
-
-            </div>
-            <script>
-                jQuery(function () {
-                    jQuery('.login-link').click(function (e) {
-                        e.preventDefault();
-                        jQuery('#top-bar-signin').toggle();
-                        jQuery('#menu-open-overlay').toggle();
-                        if (jQuery('#top-bar-signin').is(":visible")) {
-                            jQuery('#UserName').focus();
-                        }
-                    });
-                });
-            </script>
-    </div>
-</div>
-
-
-
-
-
-
-
-        
-
-        <!-- header-inside and header -->
-
-<div id="standalone-signin">
-    <div class="validation-summary-valid" data-valmsg-summary="true"><ul><li style="display:none"></li>
-</ul></div>
-    <form action="/account/login" id="login-account" method="post">    <fieldset id="social-authentication">
-        <a href="/account/authenticate/facebook" class="standaloneSocialSignIn" title="Login with Facebook"><img width='95' height="95" src="/content/v/368347303d78/shared/img/auth-facebook.png" alt="Login with Facebook" /></a>
-        <a href="/account/authenticate/google" class="standaloneSocialSignIn" title="Login with Google"><img width='95' height="95" src="/content/v/ace060e512d3/shared/img/auth-google.png" alt="Login with Google" /></a>
-        <a href="/account/authenticate/yahoo" class="standaloneSocialSignIn" title="Login with Yahoo"><img width='95' height="95" src="/content/v/2ff11e08ba40/shared/img/auth-yahoo.png" alt="Login with Yahoo" /></a>
-        
-    </fieldset> 
-<script type="text/javascript">
-        var standaloneSocialSignInLinks = $('a.standaloneSocialSignIn');
-        standaloneSocialSignInLinks.attr("href", function(i,v){
-            return v + '?js=1';
-        });
-        standaloneSocialSignInLinks.click(function(){
-            _gaq.push(['_trackEvent', 'action', 'login', 'standalone']);
-            return true;
-        });
-    </script>    <fieldset>
-        
-        <div class="field">
-            <label>Email / username</label>
-            <a href="/forgot/username" class="field-forgot-link" tabindex="4">Forgot username?</a>
-            <input data-val="true" data-val-length="The field User name must be a string with a minimum length of 2 and a maximum length of 255." data-val-length-max="255" data-val-length-min="2" data-val-required="The User name field is required." id="UserName" name="UserName" tabindex="1" type="text" value="" />
-            <span class="field-validation-valid" data-valmsg-for="UserName" data-valmsg-replace="true"></span>
-        </div>
-
-        <div class="field">
-            <label for="Password">Password</label>
-            <a href="/forgot/password" class="field-forgot-link" tabindex="5">Forgot password?</a>
-            <input data-val="true" data-val-length="The field Password must be a string with a minimum length of 1 and a maximum length of 255." data-val-length-max="255" data-val-length-min="1" data-val-required="The Password field is required." id="Password" name="Password" tabindex="2" type="password" />
-            <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
-        </div>
-
-        <div id="remember-me">
-            <input data-val="true" data-val-required="The Remember me? field is required." id="RememberMe" name="RememberMe" type="checkbox" value="true" /><input name="RememberMe" type="hidden" value="false" />
-            <span>Remember me</span>
-        </div>   
-
-        <div class="field">
-            <input id="get-started" type="submit" value = "Login" tabindex="3" />
-            <input id="standalonesigninjs" type="hidden" name="JavaScriptEnabled" value="false" />
-        </div>
-          
-    </fieldset>   
-</form>
-<script type="text/javascript">
-    $('#standalonesigninjs').attr('value', 'true');
-    $('#login-account').submit(function () { _gaq.push(['_trackEvent', 'action', 'login', 'standalone']); });
-</script>
-
-<div id="login-page-signup" class="no-oauth">
-    <label><a href="/account/register" tabindex="6">Create an account &raquo;</a></label>
-</div>
+       SBrkr	Standard Circuit Breakers & Romex
+       FuseA	Fuse Box over 60 AMP and all Romex wiring (Average)	
+       FuseF	60 AMP Fuse Box and mostly Romex wiring (Fair)
+       FuseP	60 AMP Fuse Box and mostly knob & tube wiring (poor)
+       Mix	Mixed
+		
+1stFlrSF: First Floor square feet
  
+2ndFlrSF: Second floor square feet
 
+LowQualFinSF: Low quality finished square feet (all floors)
 
-</div>
-    </div> <!-- wrap -->
+GrLivArea: Above grade (ground) living area square feet
 
-        <div id="footer">
-            <div id="footer-inside">
-                <div id="footer-social">
-                        <div id="social-links">
-            <a class="twitter" href="http://www.twitter.com/kaggle" title="Follow Kaggle on Twitter"></a>     
-                    <a class="facebook" href="http://www.facebook.com/kaggle" title="Follow Kaggle on Facebook"></a>           
-                    <a class="linkedin" href="http://www.linkedin.com/companies/kaggle" title="Follow Kaggle on LinkedIn"></a>        
-    </div><!-- social-links -->
+BsmtFullBath: Basement full bathrooms
 
-                </div>
-                <div id="footer-copyright">
-                    
+BsmtHalfBath: Basement half bathrooms
 
+FullBath: Full bathrooms above grade
 
-&copy; 2017 Kaggle Inc                </div>
-                <div id="footer-links">
-                    <a href="/team">Our Team</a>
-<a href="/terms">Terms</a>
-<a href="/privacy">Privacy</a> 
-<!--<a href="/Home/ContactPress">Press</a>-->
-<a href="/contact">Contact/Support</a>
-                </div> <!-- footer-links -->
-            </div> <!-- footer-inside -->
-        </div> <!--footer-->
+HalfBath: Half baths above grade
 
-        
-        <script type="text/javascript">
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-12629138-1']);
-            _gaq.push(['_trackPageview']);
-            _gaq.push(['_trackPageLoadTime']);
-            _gaq.push(['_setCustomVar', 1, 'usertype', 'anonymous', 2]);
-            (function () {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-        </script>
-        <script type="text/javascript">
-            /**
-        * Function that tracks a click on an outbound link in Google Analytics.
-        * This function takes a valid URL string as an argument, and uses that URL string
-        * as the event label.
-        * See: https://support.google.com/analytics/answer/1136920?hl=en
-        */
-            var trackOutboundLink = function(url) {
-                ga('send', 'event', 'outbound', 'click', url, {'hitCallback':
-                        function () {
-                            document.location = url;
-                        }
-                });
-            }
-        </script>
+Bedroom: Bedrooms above grade (does NOT include basement bedrooms)
 
-    
+Kitchen: Kitchens above grade
 
-    <!-- Cheers, RD00155D489116p. -->
-</body>
-</html>
+KitchenQual: Kitchen quality
+
+       Ex	Excellent
+       Gd	Good
+       TA	Typical/Average
+       Fa	Fair
+       Po	Poor
+       	
+TotRmsAbvGrd: Total rooms above grade (does not include bathrooms)
+
+Functional: Home functionality (Assume typical unless deductions are warranted)
+
+       Typ	Typical Functionality
+       Min1	Minor Deductions 1
+       Min2	Minor Deductions 2
+       Mod	Moderate Deductions
+       Maj1	Major Deductions 1
+       Maj2	Major Deductions 2
+       Sev	Severely Damaged
+       Sal	Salvage only
+		
+Fireplaces: Number of fireplaces
+
+FireplaceQu: Fireplace quality
+
+       Ex	Excellent - Exceptional Masonry Fireplace
+       Gd	Good - Masonry Fireplace in main level
+       TA	Average - Prefabricated Fireplace in main living area or Masonry Fireplace in basement
+       Fa	Fair - Prefabricated Fireplace in basement
+       Po	Poor - Ben Franklin Stove
+       NA	No Fireplace
+		
+GarageType: Garage location
+		
+       2Types	More than one type of garage
+       Attchd	Attached to home
+       Basment	Basement Garage
+       BuiltIn	Built-In (Garage part of house - typically has room above garage)
+       CarPort	Car Port
+       Detchd	Detached from home
+       NA	No Garage
+		
+GarageYrBlt: Year garage was built
+		
+GarageFinish: Interior finish of the garage
+
+       Fin	Finished
+       RFn	Rough Finished	
+       Unf	Unfinished
+       NA	No Garage
+		
+GarageCars: Size of garage in car capacity
+
+GarageArea: Size of garage in square feet
+
+GarageQual: Garage quality
+
+       Ex	Excellent
+       Gd	Good
+       TA	Typical/Average
+       Fa	Fair
+       Po	Poor
+       NA	No Garage
+		
+GarageCond: Garage condition
+
+       Ex	Excellent
+       Gd	Good
+       TA	Typical/Average
+       Fa	Fair
+       Po	Poor
+       NA	No Garage
+		
+PavedDrive: Paved driveway
+
+       Y	Paved 
+       P	Partial Pavement
+       N	Dirt/Gravel
+		
+WoodDeckSF: Wood deck area in square feet
+
+OpenPorchSF: Open porch area in square feet
+
+EnclosedPorch: Enclosed porch area in square feet
+
+3SsnPorch: Three season porch area in square feet
+
+ScreenPorch: Screen porch area in square feet
+
+PoolArea: Pool area in square feet
+
+PoolQC: Pool quality
+		
+       Ex	Excellent
+       Gd	Good
+       TA	Average/Typical
+       Fa	Fair
+       NA	No Pool
+		
+Fence: Fence quality
+		
+       GdPrv	Good Privacy
+       MnPrv	Minimum Privacy
+       GdWo	Good Wood
+       MnWw	Minimum Wood/Wire
+       NA	No Fence
+	
+MiscFeature: Miscellaneous feature not covered in other categories
+		
+       Elev	Elevator
+       Gar2	2nd Garage (if not described in garage section)
+       Othr	Other
+       Shed	Shed (over 100 SF)
+       TenC	Tennis Court
+       NA	None
+		
+MiscVal: $Value of miscellaneous feature
+
+MoSold: Month Sold (MM)
+
+YrSold: Year Sold (YYYY)
+
+SaleType: Type of sale
+		
+       WD 	Warranty Deed - Conventional
+       CWD	Warranty Deed - Cash
+       VWD	Warranty Deed - VA Loan
+       New	Home just constructed and sold
+       COD	Court Officer Deed/Estate
+       Con	Contract 15% Down payment regular terms
+       ConLw	Contract Low Down payment and low interest
+       ConLI	Contract Low Interest
+       ConLD	Contract Low Down
+       Oth	Other
+		
+SaleCondition: Condition of sale
+
+       Normal	Normal Sale
+       Abnorml	Abnormal Sale -  trade, foreclosure, short sale
+       AdjLand	Adjoining Land Purchase
+       Alloca	Allocation - two linked properties with separate deeds, typically condo with a garage unit	
+       Family	Sale between family members
+       Partial	Home was not completed when last assessed (associated with New Homes)
+

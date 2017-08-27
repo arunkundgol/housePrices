@@ -2,16 +2,80 @@
 title: "House Prices: Advanced regression techniques"
 output: html_notebook
 ---
+# Introduction
 The aim of this notebook is to predict sales prices and practice feature engineering, RFs and gradient boosting. There are three files given, that include - train.csv, test.csv, and sample_submission.csv. The sample_submission.csv is a bechmark submission from a linear regression on year and month of sale, lot of square footage, and number of bedrooms.
 
-```{r}
-library(readr)
+```{r, include=FALSE}
+load.libraries <- c('readr','data.table','caret','ggplot2','gridExtra','caret')
+install.lib <- load.libraries[!load.libraries %in% installed.packages()]
+for(libs in install.lib) install.packages(libs, dependences = TRUE)
+sapply(load.libraries, require, character = TRUE)
+
 train <- read_csv("~/R/housePrices/data/train.csv")
 test <- read_csv("~/R/housePrices/data/test.csv")
 sample_submission <- read_csv("~/R/housePrices/data/sample_submission.csv")
 
+cat_var <- names(train)[which(sapply(train, is.character))]
+cat_car <- c(cat_var, 'BedroomAbvGr', 'HalfBath', ' KitchenAbvGr','BsmtFullBath', 'BsmtHalfBath', 'MSSubClass')
+numeric_var <- names(train)[which(sapply(train, is.numeric))]
+```
+# Structure of the data
+The housing data has 1460 rows and 81 columns with the target feature Sale price.
+```{r }
+dim(train)
+```
+```{r}
+df = setDT(as.data.frame(colSums(sapply(train,is.na))),keep.rownames = TRUE)
+colnames(df)<-c("feature","num")
+ggplot(data=df[num !=0,,],aes(x=reorder(feature,-num),y=num)) +
+  geom_bar(stat="identity") +
+  theme(axis.text.x = element_text(angle=90,hjust =1))
+
+```
+The top five categorical values with the largest missing values include 
+
+* poolQC: indicates the pool quality
+* miscFeatures:indicates the miscellaneous features not covered by the other categories
+* alley: indicates the type of alley access
+* fence: indicates the fence quality
+* fireplacesQu: indicates the number of fireplaces
+
+The missing value indicates the majority of houses don't have alley access, no fence, or no fireplace, or other features that are covered by the MiscFeatures.
+
+## Categorical values that are of character type
+```{r}
+train = as.data.table(train)
+df = setDT(as.data.frame(colSums(sapply(train[,.SD, .SDcols=cat_var],is.na))),keep.rownames = TRUE)
+colnames(df)<-c("feature","num")
+ggplot(data=df[num !=0,,],aes(x=reorder(feature,-num),y=num)) +
+  geom_bar(stat="identity") +
+  theme(axis.text.x = element_text(angle=90,hjust =1))
+
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+## Catergorical values that are of numeric type
+```{r}
+train = as.data.table(train)
+df = setDT(as.data.frame(colSums(sapply(train[,.SD, .SDcols=numeric_var],is.na))),keep.rownames = TRUE)
+colnames(df)<-c("feature","num")
+ggplot(data=df[num !=0,,],aes(x=reorder(feature,-num),y=num)) +
+  geom_bar(stat="identity") +
+  theme(axis.text.x = element_text(angle=90,hjust =1))
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+```
+
+## Visualisation for the missing data
+```{r}
+
+plot_Missing <- function(data_in, title = NULL){
+  temp_df <- as.data.frame(ifelse(is.na(data_in), 0, 1))
+  temp_df <- temp_df[,order(colSums(temp_df))]
+  data_temp <- expand.grid(list(x = 1:nrow(temp_df), y = colnames(temp_df)))
+  data_temp$m <- as.vector(as.matrix(temp_df))
+  data_temp <- data.frame(x = unlist(data_temp$x), y = unlist(data_temp$y), m = unlist(data_temp$m))
+  ggplot(data_temp) + geom_tile(aes(x=x, y=y, fill=factor(m))) + scale_fill_manual(values=c("white", "black"), name="Missing\n(0=Yes, 1=No)") + theme_light() + ylab("") + xlab("") + ggtitle(title)
+}
+
+
+plot_Missing(train[,colSums(is.na(train)) > 0, with = FALSE])
+```

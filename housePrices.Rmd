@@ -6,14 +6,14 @@ output: html_notebook
 The aim of this notebook is to predict sales prices and practice feature engineering, RFs and gradient boosting. There are three files given, that include - train.csv, test.csv, and sample_submission.csv. The sample_submission.csv is a bechmark submission from a linear regression on year and month of sale, lot of square footage, and number of bedrooms.
 
 ```{r, include=FALSE}
-load.libraries <- c('readr','data.table','caret','ggplot2','gridExtra','caret')
+load.libraries <- c('readr','data.table','caret','ggplot2','gridExtra','caret','dplyr','e1071','corrplot','GGally')
 install.lib <- load.libraries[!load.libraries %in% installed.packages()]
-for(libs in install.lib) install.packages(libs, dependences = TRUE)
+for(libs in install.lib) install.packages(libs, dependencies = TRUE)
 sapply(load.libraries, require, character = TRUE)
 
-train <- read_csv("~/R/housePrices/data/train.csv")
-test <- read_csv("~/R/housePrices/data/test.csv")
-sample_submission <- read_csv("~/R/housePrices/data/sample_submission.csv")
+train <- read_csv("./data/train.csv")
+test <- read_csv("./data/test.csv")
+sample_submission <- read_csv("./data/sample_submission.csv")
 
 cat_var <- names(train)[which(sapply(train, is.character))]
 cat_car <- c(cat_var, 'BedroomAbvGr', 'HalfBath', ' KitchenAbvGr','BsmtFullBath', 'BsmtHalfBath', 'MSSubClass')
@@ -56,8 +56,11 @@ ggplot(data=df[num !=0,,],aes(x=reorder(feature,-num),y=num)) +
 ## Catergorical values that are of numeric type
 ```{r}
 train = as.data.table(train)
+
 df = setDT(as.data.frame(colSums(sapply(train[,.SD, .SDcols=numeric_var],is.na))),keep.rownames = TRUE)
+
 colnames(df)<-c("feature","num")
+
 ggplot(data=df[num !=0,,],aes(x=reorder(feature,-num),y=num)) +
   geom_bar(stat="identity") +
   theme(axis.text.x = element_text(angle=90,hjust =1))
@@ -66,7 +69,6 @@ ggplot(data=df[num !=0,,],aes(x=reorder(feature,-num),y=num)) +
 
 ## Visualisation for the missing data
 ```{r}
-
 plot_Missing <- function(data_in, title = NULL){
   temp_df <- as.data.frame(ifelse(is.na(data_in), 0, 1))
   temp_df <- temp_df[,order(colSums(temp_df))]
@@ -76,6 +78,69 @@ plot_Missing <- function(data_in, title = NULL){
   ggplot(data_temp) + geom_tile(aes(x=x, y=y, fill=factor(m))) + scale_fill_manual(values=c("white", "black"), name="Missing\n(0=Yes, 1=No)") + theme_light() + ylab("") + xlab("") + ggtitle(title)
 }
 
-
 plot_Missing(train[,colSums(is.na(train)) > 0, with = FALSE])
+```
+Getting insight on the number of houses that were remodeled.if the YearBuilt date is different from the YearRemodAdd, then the house was remodeled. This can be calculated as follows
+```{r}
+print(sum(train[,'YearRemodAdd',with=FALSE] != train[,'YearBuilt',with=FALSE]))
+cat('Percentage of houses remodeled',sum(train[,'YearRemodAdd', with = FALSE] != train[,'YearBuilt', with = FALSE])/ dim(train)[1])
+```
+```{r}
+cat('Train has', dim(train)[1],'rows and', dim(train)[2],'columns.', '\n')
+```
+```{r}
+cat('Test has', dim(test)[1],'rows and', dim(test)[2],'columns.', '\n')
+```
+```{r}
+train_cat <- train[,.SD,.SDcols = cat_var]
+train_cont <- train[,.SD,.SDcols = numeric_var]
+
+plotHist <- function(data_in, i) {
+  data <- data.frame(x=data_in[[i]])
+  p <- ggplot(data=data, aes(x=factor(x))) + stat_count() + xlab(colnames(data_in)[i]) + theme_light() + 
+    theme(axis.text.x = element_text(angle = 90, hjust =1))
+  return (p)
+}
+
+doPlots <- function(data_in, fun, ii, ncol=3) {
+  pp <- list()
+  for (i in ii) {
+    p <- fun(data_in=data_in, i=i)
+    pp <- c(pp, list(p))
+  }
+  do.call("grid.arrange", c(pp, ncol=ncol))
+}
+
+
+plotDen <- function(data_in, i){
+  data <- data.frame(x=data_in[[i]], SalePrice = data_in$SalePrice)
+  p <- ggplot(data= data) + geom_line(aes(x = x), stat = 'density', size = 1,alpha = 1.0) +
+    xlab(paste0((colnames(data_in)[i]), '\n', 'Skewness: ',round(skewness(data_in[[i]], na.rm = TRUE), 2))) + theme_light() 
+  return(p)
+   
+}
+
+doPlots(train_cont, fun = plotDen, ii = 2:6, ncol = 2)
+doPlots(train_cont, fun = plotDen, ii = 7:12, ncol = 2)
+doPlots(train_cont, fun = plotDen, ii = 13:17, ncol = 2)
+```
+
+```{r}
+train %>% 
+  select(Neighborhood, SalePrice) %>% 
+  ggplot(aes(factor(Neighborhood), SalePrice)) + 
+  geom_boxplot() + 
+  theme(axis.text.x = element_text(angle = 90, hjust =1)) + 
+  xlab('Neighborhoods') +
+  scale_y_continuous(labels=scales::comma)
+```
+
+# Explore the correlation
+```{r}
+correlations <- cor(na.omit(train_cont[,-1,with=FALSE]))
+
+# correlations
+row_indic <- apply(correlations, 1, function(x) sum(x >0.3 | x < -0.3) >1)
+correlations <- correlations[row_indic, row_indic]
+corrplot(correlations,method = "square")
 ```

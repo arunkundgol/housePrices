@@ -138,9 +138,25 @@ train %>%
 # Explore the correlation
 ```{r}
 correlations <- cor(na.omit(train_cont[,-1,with=FALSE]))
-
-# correlations
 row_indic <- apply(correlations, 1, function(x) sum(x >0.3 | x < -0.3) >1)
 correlations <- correlations[row_indic, row_indic]
 corrplot(correlations,method = "square")
 ```
+The correlation matrix shows there are several variables that are strongly and positively correlated with housing price.
+
+* OverallQual
+* YearBuilt
+* YearRemodAdd
+* MasvnrArea
+* BsmtFinSF1
+* TotalBsmtSF
+* 1stFlrSF
+* GrLiveArea
+* FullBath
+* TotRmsAbvGrd
+* FirePlaces
+* GarageYrBlt
+* GarageCars
+* GarageArea
+* WoodDeskSF
+* OpenPorchSF

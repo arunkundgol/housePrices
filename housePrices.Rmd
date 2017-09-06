@@ -1,6 +1,9 @@
 ---
-title: "House Prices: Advanced regression techniques"
-output: html_notebook
+title: 'House Prices: Advanced regression techniques'
+output:
+  pdf_document: default
+  html_notebook: default
+  html_document: default
 ---
 # Introduction
 The aim of this notebook is to predict sales prices and practice feature engineering, RFs and gradient boosting. There are three files given, that include - train.csv, test.csv, and sample_submission.csv. The sample_submission.csv is a bechmark submission from a linear regression on year and month of sale, lot of square footage, and number of bedrooms.
